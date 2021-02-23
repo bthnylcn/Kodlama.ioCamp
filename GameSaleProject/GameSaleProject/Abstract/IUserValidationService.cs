@@ -7,6 +7,6 @@ namespace GameSaleProject.Abstract
 {
     public interface IUserValidationService
     {
-        bool CheckIfRealPerson(Gamer gamer);
+        bool Validate(Gamer gamer);
     }
 }

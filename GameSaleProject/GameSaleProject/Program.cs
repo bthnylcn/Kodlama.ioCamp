@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GameSaleProject.Concrete;
 using GameSaleProject.Entitites;
 
@@ -13,16 +14,35 @@ namespace GameSaleProject
             gamer1.Id = 1;
             gamer1.FirstName = "Kurt";
             gamer1.LastName = "Cobain";
-            gamer1.NationalityId = "123123123123";
-            gamer1.BirthYear = new DateTime(1967, 02, 20);
+            gamer1.IdentityNumber = 123123123123;
+            gamer1.BirthYear = 1967;
 
+            Gamer gamer2 = new Gamer();
+            gamer2.Id = 1;
+            gamer2.FirstName = "James";
+            gamer2.LastName = "Hetfield";
+            gamer2.IdentityNumber = 113123123123;
+            gamer2.BirthYear = 1963;
+
+            Gamer[] gamers = new Gamer[] { gamer1, gamer2 };
+            
             //Oyuncu Ekleme (Add)
-            GamerManager gamerManager1 = new GamerManager();
-            gamerManager1.Add(gamer1);
+            GamerManager gamerManager = new GamerManager(new UserValidationManager());
+            gamerManager.Add(gamer1);
+            gamerManager.Add(gamer2);
+
+            Console.WriteLine("--------Tüm oyuncular-------");
+            foreach (var item in gamers)
+            {
+                Console.WriteLine(item.FirstName +" "+ item.LastName);
+
+            }
+            Console.WriteLine("------------------------------");
             //Oyuncu Silme (Delete)
-            gamerManager1.Delete(gamer1);
+            gamerManager.Delete(gamer1);
             //Oyuncu Güncelleme (Update)
-            gamerManager1.Update(gamer1);
+            gamerManager.Update(gamer1);
+
 
             //Oyun Oluşturma
             Game game1 = new Game();

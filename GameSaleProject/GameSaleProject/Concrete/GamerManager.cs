@@ -10,30 +10,36 @@ namespace GameSaleProject.Concrete
         {
             IUserValidationService _userValidationService;
 
-            public GamerManager()
-            {
-                
-            }
+          public GamerManager(IUserValidationService userValidationService)
+          {
+              _userValidationService = userValidationService;
+          }   
 
-            public void Add(Gamer gamer)
-            {
-               
-                    Console.WriteLine(gamer.FirstName + " " + gamer.LastName + " isimli oyuncu kayıt edildi." + '\n');
-                
-                
-            }
+          public void Add(Gamer gamer)
+          {
 
-            public void Delete(Gamer gamer)
-            {
-                Console.WriteLine(gamer.FirstName + " " + gamer.LastName + " isimli oyuncu silindi!" + '\n');
-            }
+               if (_userValidationService.Validate(gamer) == true)
+               {
+                   Console.WriteLine(gamer.FirstName + " " + gamer.LastName + " isimli oyuncu kayıt edildi." + '\n');
+               }
+               else
+               {
+                   Console.WriteLine("Doğru bilgi giriniz.Kayıt başarısız!");
+               }
+                     
+          }
 
-            public void Update(Gamer gamer)
-            {
-                
-                    Console.WriteLine(gamer.FirstName + " " + gamer.LastName + " isimli oyuncu güncellendi." + '\n');
-                
-            }
+          public void Delete(Gamer gamer)
+          {
+              Console.WriteLine(gamer.FirstName + " " + gamer.LastName + " isimli oyuncu silindi!" + '\n');
+          }
+
+          public void Update(Gamer gamer)
+          {
+              
+              Console.WriteLine(gamer.FirstName + " " + gamer.LastName + " isimli oyuncu güncellendi." + '\n');
+              
+          }
         }
     }
 
