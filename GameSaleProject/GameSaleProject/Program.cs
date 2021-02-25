@@ -18,31 +18,11 @@ namespace GameSaleProject
             gamer1.BirthYear = 1967;
 
             Gamer gamer2 = new Gamer();
-            gamer2.Id = 1;
+            gamer2.Id = 2;
             gamer2.FirstName = "James";
             gamer2.LastName = "Hetfield";
             gamer2.IdentityNumber = 113123123123;
             gamer2.BirthYear = 1963;
-
-            Gamer[] gamers = new Gamer[] { gamer1, gamer2 };
-            
-            //Oyuncu Ekleme (Add)
-            GamerManager gamerManager = new GamerManager(new UserValidationManager());
-            gamerManager.Add(gamer1);
-            gamerManager.Add(gamer2);
-
-            Console.WriteLine("--------Tüm oyuncular-------");
-            foreach (var item in gamers)
-            {
-                Console.WriteLine(item.FirstName +" "+ item.LastName);
-
-            }
-            Console.WriteLine("------------------------------");
-            //Oyuncu Silme (Delete)
-            gamerManager.Delete(gamer1);
-            //Oyuncu Güncelleme (Update)
-            gamerManager.Update(gamer1);
-
 
             //Oyun Oluşturma
             Game game1 = new Game();
@@ -50,19 +30,48 @@ namespace GameSaleProject
             game1.GameName = "Call of Duty: Modern Warfare 2";
             game1.GamePrice = 180;
 
-            //Oyun Ekleme
-            GameManager gameManager1 = new GameManager();
-            gameManager1.Add(game1);
-            //Oyun Silme
-            gameManager1.Delete(game1);
-            //Oyun Güncelleme
-            gameManager1.Update(game1);
+            Game game2 = new Game();
+            game2.Id = 2;
+            game2.GameName = "Fifa 2021";
+            game2.GamePrice = 250;
 
             //Kampanya Oluşturma
             Campaign campaign1 = new Campaign();
             campaign1.Id = 1;
             campaign1.CampaignName = "Discount 40";
             campaign1.DiscountRate = 40;
+
+            Gamer[] gamers = new Gamer[] { gamer1, gamer2 };
+            Game[] games = new Game[] { game1, game2 };
+            Campaign[] campaigns = new Campaign[] { campaign1 };
+            
+            //Oyuncu Ekleme (Add)
+            GamerManager gamerManager = new GamerManager(new UserValidationManager());
+            gamerManager.Add(gamer1);
+            gamerManager.Add(gamer2);
+
+            Console.WriteLine("--------Tüm oyuncular-------");
+
+            foreach (var item in gamers)
+            {
+                Console.WriteLine(item.FirstName +" "+ item.LastName);
+
+            }
+
+            Console.WriteLine("------------------------------");
+            //Oyuncu Silme (Delete)
+            gamerManager.Delete(gamer1);
+            //Oyuncu Güncelleme (Update)
+            gamerManager.Update(gamer1);
+           
+            //Oyun Ekleme
+            GameManager gameManager1 = new GameManager();
+            gameManager1.Add(game1);
+            gameManager1.Add(game2);
+            //Oyun Silme
+            gameManager1.Delete(game1);
+            //Oyun Güncelleme
+            gameManager1.Update(game1);
 
             //Kampanya Ekleme
             CampaignManager campaignManager1 = new CampaignManager();
