@@ -17,9 +17,9 @@ namespace DataAccess.Concrete.InMemory
         public InMemoryProductDal()
         {
             _cars = new List<Car> {
-               new Car{CarId=1,BrandId=1,ColorId=1,DailyPrice=1000,ModelYear=2015,Description="Öğretmenden satılık temiz 2.El Corolla" },
-               new Car{CarId=2,BrandId=2,ColorId=1,DailyPrice=2000,ModelYear=2020,Description="Doktordan satılık temiz 2.El Avensis" },
-               new Car{CarId=3,BrandId=1,ColorId=2,DailyPrice=5000,ModelYear=2021,Description="Galeriden satılık sıfır 3008" }
+               new Car{CarId=1,BrandId=1,ColorId=1,DailyPrice=1000,ModelYear=2015,Description="Günlük kiralık Nissan Qasqai" },
+               new Car{CarId=2,BrandId=2,ColorId=1,DailyPrice=2000,ModelYear=2020,Description="Günlük kiralık Renault Clio" },
+               new Car{CarId=3,BrandId=1,ColorId=2,DailyPrice=5000,ModelYear=2021,Description="Günlük kiralık Seat Leon" }
             };
         }
         
