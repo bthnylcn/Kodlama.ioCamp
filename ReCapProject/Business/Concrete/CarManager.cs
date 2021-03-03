@@ -18,15 +18,15 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            if ((car.Description.Length >= 2) && (car.DailyPrice > 0))
+            if ((car.ModelName.Length >= 2) && (car.DailyPrice > 0))
             {
                 _carDal.Add(car);
             }
             else
             {
-                Console.WriteLine("The car could not be added. Registration conditions;\n" +
-                    "-The car description must contain at least two characters\n" +
-                    "-The daily price of the car must be greater than zero");
+                Console.WriteLine("Araba modeli kayıt kurallarına uymuyor!\n" +
+                    "-Araba modeli 2 harftan fazla olmalı.\n" +
+                    "-Günlük fiyat 0'dan büyük olmalı.");
             }
         }
         public void Update(Car car)
@@ -37,9 +37,9 @@ namespace Business.Concrete
             }
             else
             {
-                Console.WriteLine("The car could not be added. Registration conditions;\n" +
-                    "-The car description must contain at least two characters.\n" +
-                    "-The daily price of the car must be greater than zero.");
+                Console.WriteLine("Araba modeli kayıt kurallarına uymuyor!\n" +
+                    "-Araba modeli 2 harftan fazla olmalı.\n" +
+                    "-Günlük fiyat 0'dan büyük olmalı.");
             }
         }
 

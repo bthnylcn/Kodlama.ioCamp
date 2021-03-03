@@ -17,22 +17,21 @@ namespace DataAccess.Concrete.InMemory
         public InMemoryProductDal()
         {
             _cars = new List<Car> {
-               new Car{CarId=1,BrandId=1,ColorId=1,DailyPrice=1000,ModelYear=2015,Description="Günlük kiralık Nissan Qasqai" },
-               new Car{CarId=2,BrandId=2,ColorId=1,DailyPrice=2000,ModelYear=2020,Description="Günlük kiralık Renault Clio" },
-               new Car{CarId=3,BrandId=1,ColorId=2,DailyPrice=5000,ModelYear=2021,Description="Günlük kiralık Seat Leon" }
+               new Car{CarId=1,BrandId=1,ColorId=1,DailyPrice=100,ModelYear=2018,Description="Günlük kiralık Nissan Qasqai" },
+               new Car{CarId=2,BrandId=2,ColorId=2,DailyPrice=200,ModelYear=2019,Description="Günlük kiralık Renault Clio" },
+               new Car{CarId=3,BrandId=3,ColorId=1,DailyPrice=500,ModelYear=2020,Description="Günlük kiralık Seat Leon" }
             };
         }
-        
+
         public void Add(Car car)
-        {/*Add fonksiyonu bizim global olan _product listemize bu fonksiyona verilen product
-          objesini ekleyecek*/
+        {
             _cars.Add(car);
         }
 
         public void Delete(Car car)
         {
             Car carToDelete = _cars.SingleOrDefault(p => p.CarId == car.CarId);
-            _cars.Remove(carToDelete);
+            _cars.Remove(carToDelete); ;
         }
 
         public Car Get(Expression<Func<Car, bool>> filter)
@@ -40,20 +39,14 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
-        public List<Car> Getall()
+        public List<Car> GetAll()
         {
-            return _cars;//herhangi bi parametre verilmicek.Direkt return edicek bize
+            return _cars;
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
             throw new NotImplementedException();
-        }
-
-        public List<Car> GetById(int Id)//liste dönücek
-        {
-            return _cars.Where(p => p.CarId == Id).ToList();/*where metodu IEnumarable döner
-            onu da ToList ile listeye çevirip return ettik*/
         }
 
         public void Update(Car car)
@@ -64,10 +57,7 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.DailyPrice = car.DailyPrice;
             carToUpdate.Description = car.Description;
             carToUpdate.ModelYear = car.ModelYear;
-            /*Burada _product listesindeki Id ile parametrenin Id si eşit olunca
-             adresini pdoductToUpdateye atıyoruz ardırdan güncelliyoruz*/
         }
 
-        
     }
 }

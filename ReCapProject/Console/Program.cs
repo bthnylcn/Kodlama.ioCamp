@@ -1,12 +1,19 @@
 ﻿using System;
+using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 
-namespace Console
+namespace ConsoleUI
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CarManager carManager = new CarManager(new EfCarDal());
+
+            foreach (var car in carManager.GetAll())
+            {
+                Console.WriteLine(@"{0}--{1}-----{2}---{3} TL",car.ModelName,car.ModelYear,car.Description,car.DailyPrice);
+            }
         }
     }
 }
