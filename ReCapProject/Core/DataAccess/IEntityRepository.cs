@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
-using Entities.Abstract;
-
-namespace DataAccess.Abstract
+using Core.Entities;
+//Core katmanı diğer katmanları ref almaz
+namespace Core.DataAccess
 {
     public interface IEntityRepository<T> where T : class, IEntity, new()
     {
