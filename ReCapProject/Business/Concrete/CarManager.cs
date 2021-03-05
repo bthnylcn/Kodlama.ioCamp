@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -17,56 +19,63 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
-            if ((car.ModelName.Length >= 2) && (car.DailyPrice > 0))
+            if ((car.ModelName.Length < 2) && (car.DailyPrice <= 100))
             {
-                _carDal.Add(car);
+                return new ErrorResult(Messages.ProductNameInvalid);
+                
             }
-            else
+            _carDal.Add(car);
+            return new SuccessResult(Messages.ProductAdded);
+
+        }
+        public IResult Update(Car car)
+        {
+            if ((car.ModelName.Length < 2) && (car.DailyPrice <= 0))
             {
-                Console.WriteLine("Araba modeli kayıt kurallarına uymuyor!\n" +
-                    "-Araba modeli 2 harftan fazla olmalı.\n" +
-                    "-Günlük fiyat 0'dan büyük olmalı.");
+                return new ErrorResult(Messages.ProductNameInvalid);
+
             }
+            _carDal.Update(car);
+            return new SuccessResult(Messages.ProductUpdated);
         }
-        public void Update(Car car)
+
+        public IDataResult<List<Car>> GetAll()
         {
-            if ((car.Description.Length >= 2) && (car.DailyPrice > 0))
+            return new SuccessDataResult< List < Car >> (_carDal.GetAll());
+        }
+
+        public IDataResult<List<Car>> GetById(int carId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.CarId == carId));
+        }
+
+        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId));
+        }
+
+        public IDataResult<List<Car>> GetCarsByColorId(int colorId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        {
+            return new SuccessDataResult < List < CarDetailDto >> (_carDal.GetCarDetails());
+        }
+
+        public IResult Delete(Car car)
+        {
+            if (DateTime.Now.Hour == 18)
             {
-                _carDal.Update(car);
+                return new ErrorResult(Messages.MaintenanceTime);
+
             }
-            else
-            {
-                Console.WriteLine("Araba modeli kayıt kurallarına uymuyor!\n" +
-                    "-Araba modeli 2 harftan fazla olmalı.\n" +
-                    "-Günlük fiyat 0'dan büyük olmalı.");
-            }
-        }
+            _carDal.Delete(car);
+            return new SuccessResult(Messages.ProductDeleted);
 
-        public List<Car> GetAll()
-        {
-            return _carDal.GetAll();
-        }
-
-        public List<Car> GetById(int carId)
-        {
-            return _carDal.GetAll(c => c.CarId == carId);
-        }
-
-        public List<Car> GetCarsByBrandId(int brandId)
-        {
-            return _carDal.GetAll(c => c.BrandId == brandId);
-        }
-
-        public List<Car> GetCarsByColorId(int colorId)
-        {
-            return _carDal.GetAll(c => c.ColorId == colorId);
-        }
-
-        public List<CarDetailDto> GetCarDetails()
-        {
-            return _carDal.GetCarDetails();
         }
     }
 }
