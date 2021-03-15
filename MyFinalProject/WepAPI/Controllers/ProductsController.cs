@@ -23,12 +23,47 @@ namespace WepAPI.Controllers
         {
             _productService = productService;
         }
-        [HttpGet]
-        public List<Product> Get()
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
             //Dependency chain
-            var result = _productService.GetAll();
-            return result.Data;
+            var result = _productService.GetAllByCategoryId(1);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+            //return new List<Product>
+            //{
+            //    new Product{ ProductId=1, ProductName="asd"},
+            //    new Product{ ProductId=2, ProductName="qwe"}
+            //};
+        }
+
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
+        {
+            //Dependency chain
+            var result = _productService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+           
+        }
+
+
+        [HttpPost("add")]
+        public IActionResult Add(Product product)
+        {
+            var result = _productService.Add(product);
+            if (result.Success)
+            {
+                return Ok(result);
+
+            }
+            return BadRequest(result);
         }
     }
 }

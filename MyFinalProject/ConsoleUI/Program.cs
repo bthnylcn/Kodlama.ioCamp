@@ -10,8 +10,28 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //ProductTest();
-            CategoryTest();
+            //CategoryTest();
 
+            ProductGetAll();
+
+        }
+
+        private static void ProductGetAll()
+        {
+            ProductManager productManager = new ProductManager(new EfProductDal());
+
+            var result = productManager.GetAll();
+            if (result.Success == true)
+            {
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName + "/" + product.UnitPrice);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
 
         private static void CategoryTest()
