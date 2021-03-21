@@ -24,5 +24,6 @@ namespace Business.Constants
         public static string SuccessfulLogin="Başarılı giriş.";
         public static string UserAlreadyExists="Kullanıcı zaten var.";
         public static string AccessTokenCreated="Erişim tokeni oluşturuldu.";
+        internal static string ProductCountOfCategoryError = "Bu kategoride yeterli ürün var.";
     }
 }

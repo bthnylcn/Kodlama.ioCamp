@@ -7,52 +7,77 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace WepAPI.Controllers
+namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
         //Loosely coupled
-        //Naming convention
+        //naming convention
+        //IoC Container -- Inversion of Control
         IProductService _productService;
 
         public ProductsController(IProductService productService)
         {
             _productService = productService;
         }
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            //Dependency chain
-            var result = _productService.GetAllByCategoryId(1);
+            //Swagger
+            //Dependency chain --
+
+            Thread.Sleep(1000);
+
+            var result = _productService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
-            //return new List<Product>
-            //{
-            //    new Product{ ProductId=1, ProductName="asd"},
-            //    new Product{ ProductId=2, ProductName="qwe"}
-            //};
+
         }
 
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            //Dependency chain
             var result = _productService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
             }
+
             return BadRequest(result);
-           
         }
 
+        [HttpGet("getbycategory")]
+        public IActionResult GetByCategory(int categoryId)
+        {
+            var result = _productService.GetAllByCategoryId(categoryId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getproductdetails")]
+        public IActionResult GetProductDetails(int categoryId)
+        {
+            var result = _productService.GetProductDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
 
         [HttpPost("add")]
         public IActionResult Add(Product product)
@@ -61,9 +86,10 @@ namespace WepAPI.Controllers
             if (result.Success)
             {
                 return Ok(result);
-
             }
             return BadRequest(result);
         }
+
+
     }
 }

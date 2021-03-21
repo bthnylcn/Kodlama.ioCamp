@@ -20,6 +20,7 @@ namespace Core.Utilities.Results
         {
 
         }
+
         public ErrorDataResult() : base(default, false)
         {
 
