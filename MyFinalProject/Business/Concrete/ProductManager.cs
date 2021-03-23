@@ -22,10 +22,12 @@ namespace Business.Concrete
 {
     public class ProductManager : IProductService
     {
+        //business veri katmanına bağlamak için
         IProductDal _productDal;
         ICategoryService _categoryService;
         public ProductManager(IProductDal ProductDal,ICategoryService categoryService)
         {
+            //veri erişim katmanına bağımlı fakat zayıf bağlı çünkü interface üzerinden bağlı
             _productDal = ProductDal;
             _categoryService = categoryService;
             
